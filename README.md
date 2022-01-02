@@ -10,7 +10,12 @@ The Random forest model is saved to "classifier.pkl" and used on the application
 Exploratory Data Analysis
 
 ![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/Dependent%20variable%20distribution.png)
+
 Most borrowed repayed their loans ('1')
+
+![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/Employment%20outlier.png)
+
+Some applicants have wrong employment data
 
 
 Logistic regression
