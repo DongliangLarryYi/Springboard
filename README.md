@@ -30,6 +30,7 @@ For alpha 10.0, cross validation AUC score 0.5
 For alpha 100.0, cross validation AUC score 0.5
 For alpha 1000.0, cross validation AUC score 0.5
 For alpha 10000.0, cross validation AUC score 0.5```
+
 ```
 The Optimal C value is: 0.0001
 For best alpha 0.0001, The Train AUC score is 0.7634454663526145
