@@ -77,3 +77,4 @@ The percentage of misclassified points 08.07%
 This python code is ran on streamlit cloud. The model is based on random forest
 It generates a web application which is used to predict the repayment of an applicant
 
+![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/App.png)
