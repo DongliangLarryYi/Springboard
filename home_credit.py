@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Dec  9 20:15:58 2020
-
 @author: larry
 """
 
@@ -17,7 +16,6 @@ import seaborn as sns
 
 # sklearn preprocessing for dealing with categorical variables
 from sklearn.preprocessing import LabelEncoder
-
 from sklearn.model_selection import train_test_split
 import lightgbm as lgb
 import pickle
@@ -36,7 +34,6 @@ df_test.head()
 # Exploratory Data Analysis - dependent variables
 print(df_train['TARGET'].value_counts());
 df_train['TARGET'].plot.hist();
-
 
 # Function to calculate missing values by column
 def missing_values_table(df):
@@ -75,13 +72,6 @@ unique_classes = df_train.select_dtypes('object').apply(pd.Series.nunique, axis 
 print(column_type);
 print(unique_classes);
 
-
-# Encoding Categorical Variables - one-hot encoding of categorical variables
-#df_train = pd.get_dummies(df_train)
-#columns_name = df_train.columns                       
-
-#print(df_train.shape);
-
 # Anomalies
 # ages look fine
 df_train['DAYS_BIRTH'].describe()
@@ -117,6 +107,8 @@ print('\nMost Negative Correlations:\n', correlations.head(15))
 ################
 # Feature Engineering of Application data
 # Flag to represent when Total income is greater than Credit
+# reference: https://www.kaggle.com/kbakshi98/exploring-loan-repayment-prediction
+
 df_train['INCOME_GT_CREDIT_FLAG'] = df_train['AMT_INCOME_TOTAL'] > df_train['AMT_CREDIT']
 # Column to represent Credit Income Percent
 df_train['CREDIT_INCOME_PERCENT'] = df_train['AMT_CREDIT'] / df_train['AMT_INCOME_TOTAL']
@@ -181,7 +173,6 @@ application_bureau['OVERDUE_DEBT_RATIO'] = application_bureau['OVERDUE_DEBT_RATI
 application_bureau['OVERDUE_DEBT_RATIO'].replace([np.inf, -np.inf], 0,inplace=True)
 application_bureau['OVERDUE_DEBT_RATIO'] = pd.to_numeric(application_bureau['OVERDUE_DEBT_RATIO'], downcast='float')
 
-
 # import Previous Application data
 previous_application = pd.read_csv('/Users/larry/Library/CloudStorage/Box-Box/Springboard/data/home-credit-default-risk/previous_application.csv')
 print('Previous application data shape: ', previous_application.shape, previous_application.size)
@@ -226,7 +217,6 @@ grp.columns = ['POS_'+column if column != 'SK_ID_CURR' else column for column in
 application_bureau_prev = application_bureau_prev.merge(grp, on=['SK_ID_CURR'], how='left')
 application_bureau_prev.update(application_bureau_prev[grp.columns].fillna(0))
 
-
 # import installments_payments data
 insta_payments = pd.read_csv('/Users/larry/Library/CloudStorage/Box-Box/Springboard/data/home-credit-default-risk/installments_payments.csv')
 print('Installments payment data shape: ', insta_payments.shape, insta_payments.size)
@@ -238,7 +228,6 @@ prev_columns = ['INSTA_'+column if column != 'SK_ID_CURR' else column for column
 grp.columns = prev_columns
 application_bureau_prev = application_bureau_prev.merge(grp, on =['SK_ID_CURR'], how = 'left')
 application_bureau_prev.update(application_bureau_prev[grp.columns].fillna(0))
-
 
 # import Credit card balance data
 credit_card = pd.read_csv('/Users/larry/Library/CloudStorage/Box-Box/Springboard/data/home-credit-default-risk/credit_card_balance.csv')
@@ -259,8 +248,6 @@ grp.columns = ['CREDIT_'+column if column != 'SK_ID_CURR' else column for column
 application_bureau_prev = application_bureau_prev.merge(grp, on=['SK_ID_CURR'], how='left')
 application_bureau_prev.update(application_bureau_prev[grp.columns].fillna(0))
 
-
-
 # Dividing final data into train, valid and test datasets:
 application_bureau_prev = application_bureau_prev.rename(columns = lambda x:re.sub('[^A-Za-z0-9_]+', '', x))
 y = application_bureau_prev.pop('TARGET').values
@@ -269,7 +256,6 @@ X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, stratify = y_tem
 print('Shape of X_train:',X_train.shape)
 print('Shape of X_val:',X_val.shape)
 print('Shape of X_test:',X_test.shape)
-
 
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.impute import SimpleImputer
@@ -287,7 +273,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.linear_model import SGDClassifier
 import plotly.offline as py
 import plotly.graph_objs as go
-
 
 # Featurizing the data:
 # Seperation of columns into numeric and categorical columns
@@ -332,13 +317,11 @@ print(X_train_final.shape)
 print(X_val_final.shape)
 print(X_test_final.shape)
 
-
 # Saving files to output for future reference:
 # Saving the Dataframes into CSV files for future use
 X_train_final.to_csv('X_train_final.csv',index=False)
 X_val_final.to_csv('X_val_final.csv',index=False)
 X_test_final.to_csv('X_test_final.csv',index=False)
-
 
 # Selection of features using LightGBM Classifier:
 model_sk = lgb.LGBMClassifier(boosting_type='gbdt', max_depth=7, learning_rate=0.01, n_estimators= 2000, 
@@ -355,9 +338,7 @@ with open('select_features.txt','wb') as fp:
     pickle.dump(selected_features, fp)
 print('The no. of features selected:',len(selected_features))
 
-
 # Feature Importance Plot
-# Feature importance Plot
 data1 = features_df.head(20)
 data = [go.Bar(x =data1.sort_values(by='Value')['Value'] , y = data1.sort_values(by='Value')['Feature'], orientation = 'h',
               marker = dict(
@@ -431,7 +412,6 @@ def cv_plot(alpha, cv_auc):
     plt.ylabel("Error measure")
     plt.show()
 
-
 # Logistic regression with selected features
 # Cross validation results and plot for Logistic Regression model
 missing_features_from_X_val= ['NAME_EDUCATION_TYPE_Highereducation', 'NAME_CONTRACT_TYPE_Cashloans', 'NAME_EDUCATION_TYPE_Secondarysecondaryspecial', 'ORGANIZATION_TYPE_Selfemployed', 'OCCUPATION_TYPE_Corestaff', 'NAME_EDUCATION_TYPE_Academicdegree', 'NAME_INCOME_TYPE_Stateservant']
@@ -448,7 +428,6 @@ for i in alpha:
     print('For alpha {0}, cross validation AUC score {1}'.format(i,roc_auc_score(y_val,y_pred_prob)))
 cv_plot(alpha, cv_auc_score)
 print('The Optimal C value is:', alpha[np.argmax(cv_auc_score)])
-
 
 #Logistic Regression Model Results
 best_alpha = alpha[np.argmax(cv_auc_score)]
@@ -468,7 +447,6 @@ y_pred = logreg.predict(X_test_final[selected_features_diff])
 print('The test AUC score is :', roc_auc_score(y_test,y_pred_prob))
 print('The percentage of misclassified points {:05.2f}% :'.format((1-accuracy_score(y_test, y_pred))*100))
 plot_confusion_matrix(y_test, y_pred)
-
 
 # ROC curve
 from sklearn.metrics import roc_curve
@@ -538,34 +516,17 @@ plt.grid()
 plt.legend(["AUC=%.3f"%auc])
 plt.show()
 
-
-
-
-# input csv file
-input_data = pd.read_csv("X_test_final.csv")
-y_pred_input = rf_sig_clf.predict(input_data[selected_features_diff])
-print(y_pred)
-
-
 # Save the random forest model
 import joblib
 joblib.dump(rf_sig_clf, 'classifier.pkl')
-loaded_model = joblib.load('classifier.pkl')
-y_pred_test = loaded_model.predict(input_data[selected_features_diff])
-#print(y_pred_test)
 
 # save the list of selected variables
 import pickle
 with open("selected_features.txt", "wb") as fp:   #Pickling
    pickle.dump(selected_features_diff, fp)
- 
 with open("selected_features.txt", "rb") as fp:   # Unpickling
     b = pickle.load(fp)
 print(b)
-
-# do the prediction based on the loaded model
-y_pred_test2 = loaded_model.predict(input_data[b])
-print(y_pred_test2)
 
 
 

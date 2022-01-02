@@ -8,7 +8,7 @@ import pickle
 st.title('Prediction of repayment')
 
 uploaded_file = st.file_uploader("Choose a file)")
-input_data = pd.read_csv("X_test_final.csv")
+input_data = pd.read_csv("X_test_final.csv") # By default, "X_test_final.csv" will be used when you first visit the website
 st.write("By default, the file that runs is X_test_final.csv")
 if uploaded_file is not None:
      # Can be used wherever a "file-like" object is accepted:
@@ -21,10 +21,6 @@ loaded_model = joblib.load("classifier.pkl")
 # retrieve the list of selected variables
 with open("selected_features.txt", "rb") as fp:   # Unpickling
     b = pickle.load(fp)
-
-# input csv file
-#import pandas as pd
-#input_data = pd.read_csv("X_test_final.csv")
 
 # do the prediction based on the loaded model
 y_pred = loaded_model.predict(input_data[b])
