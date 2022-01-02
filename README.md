@@ -37,7 +37,8 @@ For best alpha 0.0001, The Train AUC score is 0.7634454663526145
 For best alpha 0.0001, The Cross validated AUC score is 0.756648478021221
 For best alpha 0.0001, The Test AUC score is 0.7588733892503452
 The test AUC score is : 0.7588733892503452
-The percentage of misclassified points 28.55% ```
+The percentage of misclassified points 28.55% 
+```
 
 
 Random Forests
@@ -56,7 +57,8 @@ For best n_estimators 200 best max_depth 7, The Train AUC score is 0.77322367076
 For best n_estimators 200 best max_depth 7, The Validation AUC score is 0.7450089599835531
 For best n_estimators 200 best max_depth 7, The Test AUC score is 0.7438669588286078
 The test AUC score is : 0.7438669588286078
-The percentage of misclassified points 08.07% ```
+The percentage of misclassified points 08.07% 
+```
 
 **prediction.py**
 
