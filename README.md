@@ -20,6 +20,7 @@ Some applicants have wrong employment data
 
 
 Logistic regression
+
 Cross validation
 ```
 For alpha 0.001, cross validation AUC score 0.7534614416480928
@@ -31,6 +32,9 @@ For alpha 100.0, cross validation AUC score 0.5
 For alpha 1000.0, cross validation AUC score 0.5
 For alpha 10000.0, cross validation AUC score 0.5
 ```
+
+![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/Cross%20Validation%20Error%20Logistic%20.png)
+
 ```
 The Optimal C value is: 0.0001
 For best alpha 0.0001, The Train AUC score is 0.7634454663526145
@@ -40,8 +44,12 @@ The test AUC score is : 0.7588733892503452
 The percentage of misclassified points 28.55% 
 ```
 
+![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/Logistic%20matrix.png)
+
+![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/ROC%20logistic.png)
 
 Random Forests
+
 Cross validation
 ```
 For n_estimators 200, max_depth 5 cross validation AUC score 0.7350981362833978
@@ -59,6 +67,10 @@ For best n_estimators 200 best max_depth 7, The Test AUC score is 0.743866958828
 The test AUC score is : 0.7438669588286078
 The percentage of misclassified points 08.07% 
 ```
+
+![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/random%20forest%20matrix.png)
+
+![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/ROC%20random%20forests.png)
 
 **prediction.py**
 
