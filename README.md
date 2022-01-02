@@ -8,7 +8,7 @@ We trained logistic regression and random forests model.
 The Random forest model is saved to "classifier.pkl" and used on the application
 
 Exploratory Data Analysis
-![This is an image](Springboard/Dependent variable distribution.png)
+![This is an image](https://github.com/DongliangLarryYi/Springboard/blob/master/Dependent%20variable%20distribution.png)
 
 
 
